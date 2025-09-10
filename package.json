@@ -5,9 +5,12 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "node app.js"
+    "dev": "node app.js",
+    "build": "webpack --mode production"
+  
   },
   "keywords": ["nodejs", "example", "simple"],
   "author": "",
   "license": "MIT"
 }
+
