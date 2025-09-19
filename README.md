@@ -2,7 +2,7 @@
 
 This project demonstrates a complete CI/CD pipeline using GitHub Actions to build and deploy a Node.js application with Docker to a remote host.
 
-## 🚀 Features
+##  Features
 
 - **Automated Builds**: Triggers on pull requests and pushes to main/develop branches
 - **Docker Integration**: Multi-stage Docker build for optimized production images
@@ -12,7 +12,7 @@ This project demonstrates a complete CI/CD pipeline using GitHub Actions to buil
 - **Container Registry**: Uses GitHub Container Registry (ghcr.io) for image storage
 - **Health Checks**: Built-in health monitoring endpoints
 
-## 📋 Prerequisites
+##  Prerequisites
 
 ### Remote Host Requirements
 - Docker installed and running
@@ -30,14 +30,7 @@ Add these secrets to your GitHub repository settings:
 - `REMOTE_PORT`: SSH port (optional, defaults to 22)
 - `APP_PORT`: Port for the application (optional, defaults to 3000)
 
-#### For Production Deployments
-- `PROD_HOST`: IP address or hostname of your production server
-- `PROD_USER`: SSH username for the production server
-- `PROD_SSH_KEY`: Private SSH key for authentication
-- `PROD_PORT`: SSH port (optional, defaults to 22)
-- `PROD_APP_PORT`: Port for the production application (optional, defaults to 3000)
-
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone and Install Dependencies
 ```bash
@@ -51,18 +44,6 @@ npm install
 2. Navigate to Settings → Secrets and variables → Actions
 3. Add all the required secrets listed above
 
-### 3. SSH Key Setup
-Generate SSH keys for your remote hosts:
-```bash
-# Generate SSH key pair
-ssh-keygen -t rsa -b 4096 -C "your-email@example.com"
-
-# Copy public key to remote host
-ssh-copy-id -i ~/.ssh/id_rsa.pub user@your-remote-host
-
-# Add private key to GitHub secrets as REMOTE_SSH_KEY and PROD_SSH_KEY
-```
-
 ### 4. Test Locally
 ```bash
 # Start development server
@@ -73,7 +54,7 @@ docker build -t nodejs-app .
 docker run -p 3000:3000 nodejs-app
 ```
 
-## 🔄 Workflow Details
+##  Workflow Details
 
 ### Pull Request Workflow
 1. **Trigger**: Opens, synchronizes, or reopens PRs to main/develop
@@ -88,26 +69,26 @@ docker run -p 3000:3000 nodejs-app
 3. **Deploy**: Deploys to production environment
 4. **Cleanup**: Removes old Docker images
 
-## 📡 API Endpoints
+##  API Endpoints
 
 - `GET /` - Welcome message with service info
 - `GET /health` - Health check endpoint
 - `GET /api/status` - Detailed service status
 
-## 🐳 Docker Configuration
+##  Docker Configuration
 
 The project uses a multi-stage Docker build:
 - **deps**: Installs production dependencies
 - **builder**: Builds the application
 - **runner**: Creates optimized production image
 
-## 🔧 Environment Variables
+##  Environment Variables
 
 - `NODE_ENV`: Environment (development/production)
 - `PORT`: Application port (default: 3000)
 - `HOSTNAME`: Host binding (default: 0.0.0.0)
 
-## 📊 Monitoring
+##  Monitoring
 
 The application includes:
 - Health check endpoint (`/health`)
@@ -115,39 +96,8 @@ The application includes:
 - Graceful shutdown handling
 - Memory usage monitoring
 
-## 🚨 Troubleshooting
 
-### Common Issues
-
-1. **SSH Connection Failed**
-   - Verify SSH keys are correctly added to GitHub secrets
-   - Check remote host SSH configuration
-   - Ensure user has Docker permissions
-
-2. **Docker Build Failed**
-   - Check Dockerfile syntax
-   - Verify all dependencies are in package.json
-   - Review build logs in GitHub Actions
-
-3. **Deployment Failed**
-   - Verify remote host has Docker installed
-   - Check if ports are available
-   - Review SSH connection logs
-
-### Debug Commands
-
-```bash
-# Check Docker status on remote host
-ssh user@host "docker ps -a"
-
-# View application logs
-ssh user@host "docker logs container-name"
-
-# Check available ports
-ssh user@host "netstat -tulpn | grep :3000"
-```
-
-## 📝 Customization
+##  Customization
 
 ### Modify Application
 - Edit `server.js` for your application logic
@@ -159,15 +109,5 @@ ssh user@host "netstat -tulpn | grep :3000"
 - Edit `.github/workflows/build-and-deploy.yml`
 - Modify triggers, build steps, or deployment logic
 - Add additional environments or steps
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Create a pull request
-5. The workflow will automatically deploy a preview
-
-## 📄 License
 
 MIT License - see LICENSE file for details
